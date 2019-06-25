@@ -1,6 +1,7 @@
 package reward
 
 class WhiteboardController {
+    def calculationsService
 
     def index() { }
 
@@ -26,7 +27,18 @@ class WhiteboardController {
     def strings() {
         def first = "Dmitry"
         def last = "Dolomaniuk"
+        def fullName = "Dmitry Dolomaniuk"
+        def input = "SHOUTING"
+        def state = "ut"
         def points = 4
-        render "Hey there $first. You already have $points points."
+        render "Today is ${new Date()}."
+        render "</br> Your string, $fullName, has ${fullName.length()} characters in length."
+        render "</br>Please stop ${input.toLowerCase()}!"
+        render "</br>You live in ${state.toUpperCase()}."
+    }
+
+    def conditions() {
+        def welcomeMessage = calculationsService.welcome(params)
+        render welcomeMessage
     }
 }
