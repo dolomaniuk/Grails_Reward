@@ -1,7 +1,6 @@
 package reward
 
 class CustomerController {
-//    static scaffold = Customer
 
     def lookup() {
         def customerInstance = Customer.findAllByFirstNameIlikeAndTotalPointsGreaterThanEquals("d%", 2)
