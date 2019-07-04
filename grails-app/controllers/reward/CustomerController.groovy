@@ -2,6 +2,8 @@ package reward
 
 class CustomerController {
 
+    def calculationsService
+
     def lookup() {
         def customerInstance = Customer.findAllByFirstNameIlikeAndTotalPointsGreaterThanEquals("d%", 2)
 //        def customerInstance = Customer.findAllByFirstNameAndTotalPoints("Max", 3)
@@ -12,6 +14,24 @@ class CustomerController {
 //        def customerInstance = Customer.findAllByTotalPoints(5, [sort: "lastName"])
 //        def customerInstance = Customer.list(sort: "lastName", order: "asc", max: 20, offset: 0)
 //        [customerInstanceList: customerInstance]
+    }
+
+    def customerLookup(Customer lookupInstance){
+        def (customer, welcomeMessage)= calculationsService.processCheckin(lookupInstance)
+        render(view: "checkin", model:[customer: customer, welcomeMessage: welcomeMessage])
+        // Query customer by phone #
+        // If no result,
+        // Create a new customer
+        // Create welcome message
+        // Add award record
+        // Save customer
+        // Send welcome to kiosk
+        // If customer found,
+        // Calculate total points
+        // Create welcome message
+        // Add award record
+        // Save customer
+        // Send welcome to kiosk
     }
 
     def checkin() {}
@@ -31,6 +51,7 @@ class CustomerController {
 
     def show(Long id) {
         def customer = Customer.get(id)
+        customer = calculationsService.getTotalPoints(customer)
         [customer: customer]
     }
 
@@ -49,7 +70,6 @@ class CustomerController {
     def delete(Long id) {
         def customer = Customer.get(id)
         customer.delete()
-        println(customer.properties)
         redirect(action: "index")
     }
 }
