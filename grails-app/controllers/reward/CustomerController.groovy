@@ -24,9 +24,9 @@ class CustomerController {
         [customer: new Customer()]
     }
 
-    def save(Customer customerInstance) {
-        customerInstance.save()
-        redirect(action: "show", id: customerInstance.id)
+    def save(Customer customer) {
+        customer.save()
+        redirect(action: "show", id: customer.id)
     }
 
     def show(Long id) {
@@ -35,6 +35,21 @@ class CustomerController {
     }
 
     def edit(Long id) {
+        def customer = Customer.get(id)
+        [customer: customer]
+    }
 
+    def update(Long id) {
+        def customer = Customer.get(id)
+        customer.properties = params
+        customer.save()
+        redirect(action: "show", id: customer.id)
+    }
+
+    def delete(Long id) {
+        def customer = Customer.get(id)
+        customer.delete()
+        println(customer.properties)
+        redirect(action: "index")
     }
 }
