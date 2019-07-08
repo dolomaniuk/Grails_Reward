@@ -72,4 +72,14 @@ class CustomerController {
         customer.delete()
         redirect(action: "index")
     }
+
+    def profile() {
+        def customer = Customer.findByPhone(params.id)
+        [customer: customer]
+    }
+
+    def updateProfile(Customer customer) {
+        customer.save()
+        redirect(action: "profile", id: customer.phone)
+    }
 }

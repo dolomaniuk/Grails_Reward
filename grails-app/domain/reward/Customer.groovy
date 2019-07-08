@@ -9,9 +9,9 @@ class Customer {
     static hasMany = [awards:Award, orders:OnlineOrder]
 
     static constraints = {
-        phone()
         firstName(nullable: true, maxSize: 70)
         lastName(nullable: true, maxSize: 70)
+        phone()
         email(nullable: true, email: true)
         totalPoints(nullable: true, max: 10)
     }

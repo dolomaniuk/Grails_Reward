@@ -66,4 +66,5 @@ class CalculationsService {
         customer.totalPoints = totalAwards
         return customer
     }
+
 }
